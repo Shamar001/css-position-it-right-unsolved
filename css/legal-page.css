@@ -1,17 +1,63 @@
+:root {
+  --exercise-header-height: 56px; /* adjust to match your top nav height */
+  --legal-header-height: 64px; /* height of the fixed legal header */
+  --footer-height: 80px; /* height of the fixed footer area */
+}
+
+.exercise-header {
+  /* ensure the menu line has the height used by the fixed header */
+  height: var(--exercise-header-height);
+  position: relative;
+  z-index: 1100;
+}
+
+.legal-header {
+  position: fixed;
+  top: var(--exercise-header-height);
+  left: 0;
+  right: 0;
+  height: var(--legal-header-height);
+  background: #fff;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
 .legal-header {
   background-color: #e2e2e2;
-  padding: 30px;
-  margin-top: 60px;
+  padding: 16px 1rem; /* reduced padding so it fits directly below the menu */
   width: 100%;
+  box-sizing: border-box;
+}
+
+main {
+  padding-top: calc(
+    var(--exercise-header-height) + var(--legal-header-height) + 1rem
+  );
+  padding-bottom: calc(var(--footer-height) + 1rem);
+}
+
+#footer .footer-content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--footer-height);
+  background: #fff;
+  z-index: 1000;
+  padding: 1rem;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .legal-header h1 {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-}
-
-main {
 }
 
 section {
@@ -30,6 +76,12 @@ section {
   background-color: #2b2d3b;
   height: max-content;
   padding: 10px 16px;
+
+  /* keep the section label visible while scrolling inside its section */
+  position: sticky;
+  top: calc(var(--exercise-header-height) + var(--legal-header-height) + 1rem);
+  align-self: flex-start;
+  z-index: 2;
 }
 
 .document-content {
